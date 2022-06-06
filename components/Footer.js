@@ -32,7 +32,7 @@ const Footer = () => {
             height="300"
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
-            className="mx-auto  my-5 rounded-md  md:flex-[0.3] lg:flex-[0.7] "
+            className="mx-auto w-72 md:w-full  my-5 rounded-md  md:flex-[0.3] lg:flex-[0.7] "
           ></iframe>
         </div>
         <div className="text-center border-t-2 text-gray-400 py-4">
