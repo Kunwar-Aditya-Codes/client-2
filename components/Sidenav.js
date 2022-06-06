@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { HiOutlineMenuAlt4 } from "react-icons/hi";
 import { RiCloseCircleFill } from "react-icons/ri";
 import Submenu from "./Submenu";
@@ -6,14 +6,29 @@ import Submenu from "./Submenu";
 const Sidenav = () => {
   const [open, setOpen] = useState(false);
 
+  const sidenavRef = useRef();
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (sidenavRef.current.contains(e.target)) {
+        return;
+      }
+      setOpen(false);
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className="flex justify-end">
+    <div className="h-full flex justify-end ">
       <div
+        ref={sidenavRef}
         className={`${
           open
             ? "translate-x-1/2 md:translate-x-2/3 ease-in"
             : "translate-x-full ease-out"
-        } absolute transform duration-200 transition-all  flex flex-col pl-5 space-y-20  h-screen bg-indigo-500 border-l-4 border-indigo-900 top-0 w-full right-0 `}
+        } fixed transform  duration-200 transition-all  flex flex-col pl-5 space-y-20  h-screen bg-indigo-500 border-l-4 border-indigo-900 top-0 w-full right-0 `}
       >
         <RiCloseCircleFill
           onClick={() => setOpen(!open)}
